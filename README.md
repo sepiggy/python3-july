@@ -24,4 +24,34 @@
     - 非空表示 True; 空表示 False
     - bool(None)
 4. complex
+ 
+### 2. String
+1. 三种字符串表示法
+    - 单引号 (单双引号表示字符时串需要成对出现)
+    - 双引号
+    - 三引号 (多行字符串)
+    ```python
+    "let 's go"
+    'let "s go'
+    ```
+    
+2. 转义字符
+    - 无法 "看见" 的字符 `\n`
+    - 与语言本身语法有冲突的字符 `\'`
+    
+3. 原始字符串 (所见即所得)
+    ```python
+    print(r"c:\northwind\northwest")
+    ```
+4. 字符串运算
+    - 字符串拼接 `"hello" + "world"`
+    - 字符串复制 `"hello" * 3`
+    - 字符串截取
+        - 截取单个字符 `"hello world"[3]`, `"hello world"[-1]`
+        - 截取多个字符 (不包括终点) `"hello world"[2:-2]`
+
+     
+        
+        
+           
     
