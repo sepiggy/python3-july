@@ -614,7 +614,7 @@
         -  关键字可变参数
             - 关键字可变参数是函数定义时的概念
             
-            - 函数定义时, 在变量名之前加 `**` , 则这个参数就是关键字可变参数
+            - 函数定义时, 在参数名之前加 `**` , 则这个参数就是关键字可变参数
                 ```python
                   def demo(**param):
                       pass    
@@ -1024,8 +1024,90 @@
 3. 闭包的实质: `保存函数调用时的现场`
 
 ### 3. 函数式编程
+1. 匿名函数
+    - 匿名函数的定义
+        - 使用 `lambda` 关键字定义匿名函数
+        - 匿名函数没有函数名和 `return` 语句
+        - 格式: `lambda parameter_list: expression`, 这里只能是 expression (表达式), 不能是语句, 更不能是代码块
+        ```python
+        lambda x,y: x + y
+        ```
+        
+    - 匿名函数的调用
+        - 将匿名函数赋值给一个变量, 通过变量进行调用
+        ```python
+        f = lambda x,y: x+y
+        f(1,2)
+        ```
+        
+    - 三元表达式
+        - `x if x > y else y`, 这是 Python 中的三元表达式, 类比于其他语言的 `x > y ? x : y`
+        - 因为 Python 中的匿名函数只能使用表达式, 因此三元表达式用在 Python 匿名函数的情况比较多
+        
+2. 高阶函数
+    - map
+        - map 是一个类
+        - 通过 map 的构造函数可以创建集合的一个映射, 其中的映射规则由我们定义的函数来实现
+        - map 的映射规则多由匿名函数来定义, 即 map 多与 lambda 表达式结合使用
+        
+    -  reduce
+        - reduce 是一个函数
+        - 连续计算, 连续调用 lambda 表达式
+        - 上一次 lambda 表达式的计算结果参与到下一次的 lambda 表达式的计算
+        
+    - filter
+        - filter 是一个类
 
 ### 4. 装饰器
+1. 装饰器的几个关键点
+    - 装饰器是一种 `设计模式`: `在不改变函数具体实现的前提下, 改变函数的行为` 
+    - 装饰器体现了软件工程中的 `开闭原则`
+    - 装饰器体现了 `代码复用` 的原则
+    - 装饰器体现的思想是 `AOP`
+    - 装饰器的表现形式是 `函数`
+
+2. 装饰器的定义 (装饰器就是一个函数, 其定义方式与函数的定义是相同的)
+    - 装饰器的定义类比与函数的定义, 因为装饰器本身就是函数
+        ```python
+        def decorator(func):
+            def wrapper():
+                print(time.time())
+                func()
+
+            return wrapper
+        ```
+    
+    - 通过 `可变参数` 定义装饰器, 以实现一个装饰器可以装饰多个函数, 且这些函数的参数个数不相同
+        ```python
+        def decorator(func):
+           def wrapper(*args):
+               print(time.time())
+               func(*args)
+
+           return wrapper
+        ```
+    
+    - 通过 `可变参数` 和 `关键字可变参数` 定义装饰器, 以实现一个装饰器可以装饰多个函数, 且这些函数的参数列表是任意形式
+        ```python
+        def decorator(func):
+            def wrapper(*args, **kw):
+                  print(time.time())
+                  func(*args, **kw)
+            
+            return wrapper
+        ```
+        
+    - 在 Python 中 `func(*args, **kw)` 的形式可以代表任意参数类型的函数
+    
+    - 一个装饰器可以用在多个函数上; 一个函数也可以添加多个装饰器
+
+3. 装饰器的使用
+    - 通过语法糖 `@装饰器` 调用装饰器, 这样可以不用改变原来函数的调用方式
+     ```python
+     @decorator
+     def f1():
+       print('This is a function')
+    ```
     
 ### 5. 未归类
 
