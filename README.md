@@ -1109,7 +1109,83 @@
        print('This is a function')
     ```
     
+4. 装饰器的副作用
+    - 使用装饰器的函数调用 `__name__` 方法会返回装饰器的名称, 而不是该函数的名称
+    
+    - 使用 `@wraps` 装饰器可以解决上述问题
+    
 ### 5. 未归类
+1. 用 `dict` 映射代替其他语言中的 `switch case` 语句
+    ```python
+    def get_sunday():
+        return 'Sunday'
+
+    def get_monday():
+        return 'Monday'
+
+    def get_tuesday():
+        return 'Tuesday'
+
+    def get_default():
+        return 'Unknown'
+
+    switcher = {
+        0: get_sunday,
+        1: get_monday,
+        2: get_tuesday
+    }
+
+    day = 1234
+    day_name = switcher.get(day, get_default)()
+    print(day_name)
+    ```
+    
+2. 列表推导式
+    - 定义: `用一个已经存在的列表创建一个新的列表`
+        ```python
+        a = [1, 2, 3, 4, 5, 6, 7, 8]
+        b = [i**2 for i in a if i >= 5]
+        print(b)
+        ```
+        
+    - 在 Python 中根据旧列表创建新列表大致有三种方法:
+        - for 循环
+        - map 高阶函数
+        - 列表推导式
+
+    - 虽然名字是 `列表推导式`, 但这种写法不局限于 `list`, 还可以是 `tuple`, `set`, `dict`
+    
+3. None与判空操作
+    - None 的类型是 `NoneType`, 值是 `None`, 表示 `不存在`
+    
+    - 无论从类型还是值的角度, `None` 和 `空字符串`, `空列表`, `0`, `False` 都不是一回事
+    
+    - `if not a` vs. `if a is None`
+        ```python
+        a = []
+        if not a:
+          print('S')
+        else:
+          print('F')
+    
+        if a is None:
+          print('S')
+        else:
+          print('F')
+        ```
+        
+    - 推荐使用 `if not a` 进行判空, 对于以下 4 种情况, `not a` 都是 `True` [最佳实践]
+        - a = None
+        - a = ''
+        - a = []
+        - a = False
+        
+    - 对于自定义对象 a, 对象存在**不等价于**可以使用 `if a` 做条件判断, 也就是说 `bool(a)` 不一定返回 `True`
+    
+    - `__bool__` 和 `__len__` 方法将会影响自定义对象 a 的表达式 bool(a) 的取值
+        - `__bool__` 方法只能返回 `bool` 类型的值
+        - `__len__` 方法只能返回 `int` 或 `bool` 类型的值
+        - `__bool__` 方法影响的优先级大于 `__len__` 方法 (python3)
 
 ## 十 爬虫实战
 1. 爬虫前奏

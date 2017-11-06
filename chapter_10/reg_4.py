@@ -17,3 +17,4 @@ print(r)
 
 r = re.findall('\s', a)
 print(r)
+
