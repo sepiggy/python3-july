@@ -1,3 +1,4 @@
+Demos for [全网最热的 Python3 入门 + 进阶 比自学更快上手实际开发](http://coding.imooc.com/learn/list/136.html)
 ## 一 基本类型
 ### 1. 数字 (4种)
 1. int
